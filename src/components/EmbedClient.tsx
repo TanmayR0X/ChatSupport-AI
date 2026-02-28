@@ -59,10 +59,10 @@ function EmbedClient({ ownerId }: { ownerId: string }) {
                 <span className='ml-4 text-xs text-gray-500'>Your-website.com</span>
               </div>
               <div className='relative h-64 sm:h-72 p-6 text-gray-400 text-sm'>
-                Your website goes here
+                <div className='max-sm:-mt-4'>Your website goes here</div>
 
 
-                <div className='absolute bottom-24 right-6 w-64 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden'>
+                <div className='absolute bottom-24 max-sm:bottom-22 right-6 w-64 max-sm:w-50 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden'>
                   <div className='bg-black text-white text-xs px-3 py-2 flex justify-between items-center'>
                     <span>Customer Support</span>
                     <span>X</span>
@@ -77,7 +77,7 @@ function EmbedClient({ ownerId }: { ownerId: string }) {
                 <motion.div
                 animate={{y:[0, -8, 0]}}
                 transition={{repeat: Infinity, duration: 3}}
-                className='absolute bottom-6 right-6 w-14 h-14 rounded-full bg-black text-white flex items-center justify-center shadow-2xl cursor-pointer'
+                className='absolute bottom-6 max-sm:bottom-4 right-6 w-14 h-14 rounded-full bg-black text-white flex items-center justify-center shadow-2xl cursor-pointer'
                 >
                   🗨️
                 </motion.div>
