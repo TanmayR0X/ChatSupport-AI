@@ -1,0 +1,93 @@
+'use client'
+import React, { useState } from 'react'
+import { useRouter } from "next/navigation"
+import { motion } from 'motion/react';
+function EmbedClient({ ownerId }: { ownerId: string }) {
+  const navigate = useRouter();
+  const [copied, setCopied] = useState(false);
+  const embedCode = `<script 
+  src="${process.env.NEXT_PUBLIC_APP_URL}/chatbot.js" 
+  data-owner-id="${ownerId}">
+</script>`
+  const copyCode = () => {
+    navigator.clipboard.writeText(embedCode);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  }
+  return (
+    <div className='min-h-screen bg-gray-50 text-gray-900'>
+      <div className='sticky top-0 z-40 bg-white border-b border-gray-200'>
+        <div className='max-w-7xl mx-auto px-6 h-16 flex items-center justify-between'>
+          <div className='text-lg font-semibold tracking-wide bg-linear-to-r from-gray-800 via-gray-600 to-gray-700 bg-clip-text text-transparent uppercase cursor-pointer max-sm:text-sm' onClick={() => navigate.push("/")}>ChatSupport <span className='text-gray-400'>AI</span></div>
+          <button className='px-4 py-2 rounded-lg border border-gray-300 text-sm hover:bg-gray-100 transition cursor-pointer' onClick={() => navigate.push("/dashboard")}>Back to Dashboard</button>
+        </div>
+      </div>
+      <div className='flex justify-center px-4 py-14'>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className='w-full max-w-4xl bg-white rounded-xl shadow-xl p-10'
+        >
+          <h1 className='text-2xl font-semibold mb-2'>Embed ChatBot</h1>
+          <p className='text-gray-600'>Copy and paste this code before <code className='text-black'>&lt;/body&gt;</code></p>
+          <div className='relative bg-gray-900 text-gray-100 rounded-xl p-5 text-md font-mono mb-10 mt-2'>
+            <pre className='overflow-x-auto'>{embedCode}</pre>
+            <button className={`absolute top-3 right-3 bg-white text-gray-900 text-sm max-sm:text-xs font-medium px-3 py-1.5 rounded-lg hover:bg-gray-200 transition cursor-pointer ${copied && "text-green-600"}`} onClick={copyCode}>
+              {copied ? "Copied ✔" : "Copy"}
+            </button>
+          </div>
+
+
+          <ol className='space-y-3 text-md text-gray-700 list-decimal list-inside'>
+            <li>Copy the Embed Script</li>
+            <li>Paste it before the closing body tag</li>
+            <li>Reload your Website</li>
+          </ol>
+
+          <div className='mt-14'>
+            <h1 className='text-lg font-medium mb-2'>Live Preview</h1>
+            <p className='text-sm text-gray-600 mb-6'>This is how chatbot will appear on your website</p>
+
+            <div className="rounded-xl border border-gray-300 bg-white shadow-md overflow-hidden">
+              <div className='flex items-center gap-2 px-4 h-9 bg-gray-100 border-b border-gray-200'>
+                <span className='w-2.5 h-2.5 rounded-full bg-red-400' />
+                <span className='w-2.5 h-2.5 rounded-full bg-yellow-400' />
+                <span className='w-2.5 h-2.5 rounded-full bg-green-400' />
+                <span className='ml-4 text-xs text-gray-500'>Your-website.com</span>
+              </div>
+              <div className='relative h-64 sm:h-72 p-6 text-gray-400 text-sm'>
+                Your website goes here
+
+
+                <div className='absolute bottom-24 right-6 w-64 bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden'>
+                  <div className='bg-black text-white text-xs px-3 py-2 flex justify-between items-center'>
+                    <span>Customer Support</span>
+                    <span>X</span>
+                  </div>
+
+                  <div className='p-3 space-y-2 bg-gray-50'>
+                    <div className='bg-gray-200 text-gray-800 text-xs px-3 py-2 rounded-lg w-fit'>Hi! How can I help you?</div>
+                    <div className='bg-black text-white text-xs px-3 py-2 rounded-lg ml-auto w-fit'>what is the return policy?</div>
+                  </div>
+                </div>
+
+                <motion.div
+                animate={{y:[0, -8, 0]}}
+                transition={{repeat: Infinity, duration: 3}}
+                className='absolute bottom-6 right-6 w-14 h-14 rounded-full bg-black text-white flex items-center justify-center shadow-2xl cursor-pointer'
+                >
+                  🗨️
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  )
+}
+
+export default EmbedClient
