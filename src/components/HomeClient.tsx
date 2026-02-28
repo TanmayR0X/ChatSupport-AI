@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 function HomeClient({ email }: { email: string }) {
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
   const navigate = useRouter();
   useEffect(() => {
@@ -17,6 +18,7 @@ function HomeClient({ email }: { email: string }) {
   }, [])
 
   const handleLogin = () => {
+    setLoading(true);
     window.location.href = "/api/auth/login"
   }
   const handleLogout = async () => {
@@ -67,8 +69,9 @@ function HomeClient({ email }: { email: string }) {
             </AnimatePresence>
           </div> : <button
             className='px-5 py-2 rounded-full bg-black text-white font-semibold hover:bg-gray-800 transition disabled:opacity-60 flex items-center gap-2 cursor-pointer'
+            disabled={loading}
             onClick={handleLogin}
-          >Login</button>}
+          >{loading?"Logging in..": "Login"}</button>}
         </div>
       </motion.nav>
       <section className='pt-36 pb-28 px-6'>
