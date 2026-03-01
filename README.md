@@ -24,6 +24,21 @@ AI Customer Support Chat is a full-stack Next.js app for embedding an AI support
 | ScaleKit | OAuth and SSO authentication |
 | Gemini AI | LLM response generation |
 
+
+## High Level Design(Diagram)
+
+<kbd>
+<img
+  width="6572"
+  height="2493"
+  alt="ChatSupport AI HLD Diagram"
+  src="https://github.com/user-attachments/assets/61195892-4a2d-479d-95b7-56618b2f695f"
+  style="border-radius: 10px; max-width: 100%;"
+/>
+</kbd>
+
+
+
 ## Features
 
 - ScaleKit-based authentication
@@ -180,7 +195,7 @@ GEMINI_API_KEY=
 ```html
 <script
   src="https://your-live-link.com/embed.js"
-  data-owner-id=""
+  data-owner-id="xxxxxxxxxxxxxxxxx"
 ></script>
 ```
 
